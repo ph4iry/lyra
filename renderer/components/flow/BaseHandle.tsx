@@ -12,7 +12,7 @@ export const BaseHandle = forwardRef<HTMLDivElement, BaseHandleProps>(
         ref={ref}
         {...props}
         className={cn(
-          "size-4 rounded-full bg-red-500 transition",
+          "opacity-0",
           className,
         )}
         {...props}

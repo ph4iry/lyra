@@ -129,12 +129,12 @@ export const NodeHeaderAction = forwardRef<
 >(({ className, label, title, ...props }, ref) => {
   return (
     <Button
+      {...props}
       ref={ref}
       variant="ghost"
       aria-label={label}
       title={title ?? label}
       className={cn(className, "nodrag size-6 p-1")}
-      {...props}
     />
   );
 });

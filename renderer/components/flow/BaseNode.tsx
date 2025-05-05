@@ -1,6 +1,7 @@
 import { forwardRef, HTMLAttributes } from "react";
 
 import clsx from "clsx";
+import { motion } from "motion/react";
 
 export const BaseNode = forwardRef<
   HTMLDivElement,
@@ -9,9 +10,9 @@ export const BaseNode = forwardRef<
   <div
     ref={ref}
     className={clsx(
-      "relative rounded-md bg-card p-5 text-card-foreground",
+      "relative rounded-md p-5",
       className,
-      selected ? "border-muted-foreground shadow-lg" : "",
+      selected ? "shadow-lg" : "",
       "hover:ring-1",
     )}
     tabIndex={0}
