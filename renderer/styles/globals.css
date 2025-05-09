@@ -13,3 +13,15 @@
     @apply text-white font-bold px-4 py-2 rounded bg-blue-600 hover:bg-blue-500;
   }
 }
+
+.spin-animation svg {
+  animation: spin 1s linear;
+}
+@keyframes spin {
+  from {
+  transform: rotate(0deg);
+  }
+  to {
+  transform: rotate(360deg);
+  }
+}

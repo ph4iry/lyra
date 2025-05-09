@@ -44,6 +44,7 @@ export const PlaceholderNode = forwardRef<HTMLDivElement, PlaceholderNodeProps>(
           position: { x: (currentNode?.position?.x || 0) + 300, y: currentPositionY },
           data: {
             label: "output document",
+            id: `${id}-output`,
             source: { 
               author: "Unknown",
               title: "Unknown",
@@ -73,7 +74,7 @@ export const PlaceholderNode = forwardRef<HTMLDivElement, PlaceholderNodeProps>(
             id: `${id}-to-output`,
             source: id,
             target: `${id}-output`,
-            type: "bezier",
+            type: "floating",
             animated: false,
             markerEnd: {
               type: MarkerType.ArrowClosed,

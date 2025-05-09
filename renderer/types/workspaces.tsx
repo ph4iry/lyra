@@ -55,12 +55,12 @@ export interface Workspace {
   operations: Operation[];
 }
 
-interface WorkspacesContextType {
-  workspaces: Workspace[];
-  setWorkspaces: (workspaces: Workspace[]) => void;
-}
+export const WorkspacesContext = createContext<[Workspace[], (workspaces: Workspace[]) => void]>([
+  [],
+  () => {},
+]);
 
-export const WorkspacesContext = createContext<WorkspacesContextType>({
-  workspaces: [],
-  setWorkspaces: () => {},
-});
+export const ActiveWorkspaceContext = createContext<[(string | null), (ws: string | null) => void]>([
+  '',
+  () => {},
+]);

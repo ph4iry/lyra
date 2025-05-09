@@ -18,7 +18,7 @@ export default function DocumentNode({ data }: NodeProps<Node<{ source: Source }
           <div className="text-sm text-neutral-500 uppercase font-semibold">{data.source.publisher}</div>
           <div className="text-base font-semibold">"{data.source.title}"</div>
           <div className="text-sm text-white">{data.source.author}</div>
-          <BaseHandle type="source" position={Position.Right} className="" />
+          <BaseHandle type="source" position={Position.Bottom} className="" />
         </div>
       </BaseNode>
     </motion.div>

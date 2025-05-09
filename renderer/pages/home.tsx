@@ -1,15 +1,13 @@
 import React from 'react'
 import Head from 'next/head'
-import Link from 'next/link'
 import { Bricolage_Grotesque, Instrument_Sans } from 'next/font/google'
-import Sidebar from '@/renderer/components/dom/Sidebar'
-import { Background, BackgroundVariant, Controls, MarkerType, Panel, ReactFlow, ReactFlowProvider } from '@xyflow/react';
-import DocumentNode from '@/renderer/components/flow/DocumentNode';
-import { PlaceholderNode } from '../components/flow/PlaceholderOperationNode'
-import OutputNode from '../components/flow/OutputNode'
-
+import Sidebar from '../components/dom/Sidebar'
+import { ReactFlowProvider } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
-import OperationNode from '../components/flow/OperationNode'
+import Flow from '../components/flow/Flow';
+
+import WorkspaceProvider from '../components/dom/WorkspaceProvider'
+import NewDocument from '../components/dom/documents/NewDocument'
 
 const bricolage = Bricolage_Grotesque({
   subsets: ['latin'],
@@ -24,58 +22,6 @@ const instrument = Instrument_Sans({
 })
 
 export default function HomePage() {
-  const nodeTypes = { 
-    document: DocumentNode,
-    operation: OperationNode,
-    placeholder: PlaceholderNode,
-    'output-document': OutputNode,
-  }
-
-  const defaultNodes = [
-    {
-      id: 'node-1',
-      type: 'document',
-      data: {
-        source: {
-        publisher: 'Vox',
-        title: 'Applying to College Today Is Incredibly Public and Incredibly Isolating',
-        author: 'Anna North',
-        id: Date.now() // timestamp
-        }
-      },
-      position: { x: 400, y: 250 }
-    },
-    {
-      id: 'node-3',
-      type: 'placeholder',
-      data: {
-        operation: 'link'
-      },
-      position: { x: 1000, y: 250 }
-    },
-    // {
-    //   id: 'node-2',
-    //   type: 'operation',
-    //   data: {
-    //     operation: 'link'
-    //   },
-    //   position: { x: 400, y: 250 }
-    // }
-  ];
-
-  const defaultEdges = [
-    {
-      id: 'edge-1',
-      source: 'node-1',
-      target: 'node-3',
-      animated: true,
-      type: 'bezier',
-      markerEnd: {
-        type: MarkerType.ArrowClosed,
-      },
-    }
-  ];
-
   return (
     <React.Fragment>
       <Head>
@@ -87,16 +33,13 @@ export default function HomePage() {
         </div>
         <ReactFlowProvider>
           <div className="flex flex-nowrap w-screen h-screen">
-            {/* <div key='dom-ui' className="fixed w-screen h-screen z-10 top-0 left-0">
-            </div> */}
-            <Sidebar />
-            <div key='react-flow-instance' className="h-screen w-full">
-              <ReactFlow {...{ nodeTypes, defaultNodes, defaultEdges }}>
-                <Background color="#52525270" variant={BackgroundVariant.Dots} size={3} gap={32} />
-                {/* <Panel position="top-right" className="translate-y-14 dark:bg-dark-800-dark bg-dark-800 p-4">top-right</Panel> */}
-                {/* <Controls /> */}
-              </ReactFlow>
-            </div>
+            <WorkspaceProvider>
+              <div key='dom-ui'>
+                <Sidebar />
+                <NewDocument />
+              </div>
+              <Flow />
+            </WorkspaceProvider>
           </div>
         </ReactFlowProvider>
       </main>

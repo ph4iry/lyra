@@ -1,12 +1,10 @@
 import { AnimatePresence, motion } from 'motion/react';
 import { useState, useContext } from 'react';
 import { WorkspacesContext, Workspace } from '@/renderer/types/workspaces';
-import useStorage from '@/renderer/hooks/useStorage';
 
 export default function NewWorkspace() {
   const [open, setOpen] = useState(false);
-  const { workspaces, setWorkspaces } = useContext(WorkspacesContext);
-  const { storedValue, updateValue } = useStorage<Workspace[]>('workspaces', []);
+  const [workspaces, setWorkspaces] = useContext(WorkspacesContext);
   const [wsName, setWsName] = useState('');
 
   return (
@@ -22,14 +20,6 @@ export default function NewWorkspace() {
               <button className="bg-indigo-500 text-white rounded-md p-2 w-full mt-4" onClick={() => {
                 const now = new Date();
                 setWorkspaces([...workspaces, {
-                  name: wsName,
-                  id: `${now.valueOf()}`,
-                  createdAt: now,
-                  updatedAt: now,
-                  documents: [],
-                  operations: []
-                }]);
-                updateValue([...storedValue, {
                   name: wsName,
                   id: `${now.valueOf()}`,
                   createdAt: now,
