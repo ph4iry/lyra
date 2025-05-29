@@ -17,4 +17,16 @@ const handler = {
 
 contextBridge.exposeInMainWorld('ipc', handler)
 
+contextBridge.exposeInMainWorld('api', {
+    // Expose secure API methods here
+    sendMessage: (message) => {
+      console.log('Received message:', message);
+    },
+    // Add new method to handle API routes
+    callApi: async (endpoint: string, options: RequestInit = {}) => {
+      return ipcRenderer.invoke('api-request', { endpoint, options });
+    }
+  }
+);
+
 export type IpcHandler = typeof handler

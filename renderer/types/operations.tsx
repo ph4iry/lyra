@@ -1,4 +1,4 @@
-export type DocumentOperation = 'link' | 'question' | 'cite' | 'unknown' | 'nullish'
+export type DocumentOperation = 'link' | 'question' | 'cite' | 'unknown' | 'nullish' | 'summarize'
 
 export interface Operation<T> {
   operation: DocumentOperation;

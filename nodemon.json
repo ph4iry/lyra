@@ -1,0 +1,6 @@
+{
+  "watch": ["server/routes", "server/index.ts"],
+  "ext": "ts,json",
+  "ignore": ["server/routes/**/*.test.ts"],
+  "exec": "npx tsx server/index.ts"
+} 

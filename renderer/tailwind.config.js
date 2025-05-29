@@ -23,6 +23,7 @@ module.exports = {
       fontFamily: {
         display: ['var(--font-bricolage)', 'sans-serif'],
         sans: ['var(--font-instrument)', 'sans-serif'],
+        fancy: ['var(--font-instrument-serif)', 'serif'],
       }
     },
   },

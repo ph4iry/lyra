@@ -38,3 +38,29 @@ app.on('window-all-closed', () => {
 ipcMain.on('message', async (event, arg) => {
   event.reply('message', `${arg} World!`)
 })
+
+// Add handler for API requests
+ipcMain.handle('api-request', async (event, { endpoint, options }) => {
+  try {
+    const port = 3001; // Use the new server port
+    const response = await fetch(`http://localhost:${port}/api/${endpoint}`, {
+      ...options,
+      headers: {
+        'Content-Type': 'application/json',
+        ...options.headers,
+      },
+    })
+    
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`API request failed with status ${response.status}:`, errorText);
+      throw new Error(`API request failed: ${response.status} ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('API request failed:', error);
+    throw error;
+  }
+})

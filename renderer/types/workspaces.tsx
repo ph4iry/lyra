@@ -1,4 +1,5 @@
 import { createContext } from "react";
+import { ArticleData } from "@extractus/article-extractor";
 
 /*
 terminology:
@@ -24,9 +25,8 @@ export interface SubLyra { // a node
 }
 
 export interface Source {
-  title: string;
-  publisher: string;
-  author: string;
+  title?: string;
+  author?: string;
   publishedAt?: string;
 }
 
@@ -51,7 +51,7 @@ export interface Workspace {
   name: string;
   createdAt: Date;
   updatedAt: Date;
-  documents: Document[];
+  documents: Partial<Document & ArticleData>[];
   operations: Operation[];
 }
 
@@ -62,5 +62,10 @@ export const WorkspacesContext = createContext<[Workspace[], (workspaces: Worksp
 
 export const ActiveWorkspaceContext = createContext<[(string | null), (ws: string | null) => void]>([
   '',
+  () => {},
+]);
+
+export const GlobalDocumentsContext = createContext<[(Document[]), (docs: Document[]) => void]>([
+  [],
   () => {},
 ]);

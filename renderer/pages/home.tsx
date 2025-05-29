@@ -1,6 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-import { Bricolage_Grotesque, Instrument_Sans } from 'next/font/google'
+import { Bricolage_Grotesque, Instrument_Sans, Instrument_Serif } from 'next/font/google'
 import Sidebar from '../components/dom/Sidebar'
 import { ReactFlowProvider } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
@@ -19,29 +19,36 @@ const instrument = Instrument_Sans({
   subsets: ['latin'],
   weight: ['400', '600', '700'],
   variable: '--font-instrument',
-})
+});
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ['latin'],
+  style: 'italic',
+  weight: ['400'],
+  variable: '--font-instrument-serif',
+});
 
 export default function HomePage() {
   return (
     <React.Fragment>
       <Head>
-        <title>Lyra Home</title>
+        <title>Lyra</title>
       </Head>
-      <main className={`${bricolage.variable} ${instrument.variable} font-sans h-screen bg-dark-800/15 dark:bg-dark-800-dark/15`}>
-        <div className="fixed w-screen z-50 top-0 h-10 flex justify-center items-center bg-dark-800 dark:bg-dark-800-dark border-b border-dark-300 dark:border-dark-300-dark">
-          <div className="text-xl font-bold font-display">lyra</div>
+      <main className={`${bricolage.variable} ${instrument.variable} ${instrumentSerif.variable} font-sans h-screen bg-dark-800/15 dark:bg-dark-800-dark/15`}>
+        <div id="toolbar" className="fixed w-screen z-50 top-0 h-10 flex justify-center items-center bg-neutral-900">
+          <div className="text-xl font-display">lyra</div>
         </div>
-        <ReactFlowProvider>
-          <div className="flex flex-nowrap w-screen h-screen">
-            <WorkspaceProvider>
-              <div key='dom-ui'>
-                <Sidebar />
-                <NewDocument />
-              </div>
-              <Flow />
-            </WorkspaceProvider>
-          </div>
-        </ReactFlowProvider>
+        <div className="flex flex-nowrap w-screen h-screen">
+          <ReactFlowProvider>
+              <WorkspaceProvider>
+                <div key='dom-ui'>
+                  <Sidebar />
+                  <NewDocument />
+                </div>
+                <Flow />
+              </WorkspaceProvider>
+          </ReactFlowProvider>
+        </div>
       </main>
     </React.Fragment>
   )
